@@ -1,0 +1,6 @@
+C:\Code\SnakeMovement\SnakeMovement\bin\Debug\SnakeMovement.exe.config
+C:\Code\SnakeMovement\SnakeMovement\obj\Debug\SnakeMovement.csprojResolveAssemblyReference.cache
+C:\Code\SnakeMovement\SnakeMovement\bin\Debug\SnakeMovement.exe
+C:\Code\SnakeMovement\SnakeMovement\bin\Debug\SnakeMovement.pdb
+C:\Code\SnakeMovement\SnakeMovement\obj\Debug\SnakeMovement.exe
+C:\Code\SnakeMovement\SnakeMovement\obj\Debug\SnakeMovement.pdb

@@ -48,6 +48,7 @@
     <Compile Include="IRenderEngine.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Score.cs" />
     <Compile Include="Snake.cs" />
     <Compile Include="SnakeGame.cs" />
     <Compile Include="Vector2D.cs" />

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data;
 using System.Threading;
 
 namespace SnakeMovement
@@ -7,6 +8,7 @@ namespace SnakeMovement
     {
         private readonly Grid grid;
         private readonly Snake snake;
+        private readonly Score score;
         private readonly CollisionManager collisionManager;
         private int gameState = 1;
         private readonly InputMapper inputMapper;
@@ -17,6 +19,7 @@ namespace SnakeMovement
             this.renderEngine = renderEngine;
             collisionManager = new CollisionManager();
             inputMapper = new InputMapper();
+            score = new Score(0, 12);
             gameState = 1;
             grid = new Grid(new int[,] {
                 { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 }, 
@@ -35,26 +38,27 @@ namespace SnakeMovement
             grid.AddRandomPowerUp(snake.GetPositions());
         }
 
-        public void Run()
-        {
-            grid.Draw(renderEngine);
-            snake.Draw(renderEngine);
+        public void Run() {
+            Draw();
 
             while (gameState == 1) {
-                Input input = GetInput();
-                if (input == Input.Exit)
-                    gameState = 0;
-
-                HandleInput(snake, input);
-                snake.Upate();
-
+                HandleInput();
+                Update();
                 HandleCollisions();
-
-                grid.Draw(renderEngine);
-                snake.Draw(renderEngine);
+                Draw();
             }
 
             DrawGameOver();
+        }
+
+        private void Update() {
+            snake.Upate();
+        }
+
+        private void Draw() {
+            grid.Draw(renderEngine);
+            snake.Draw(renderEngine);
+            score.Draw(renderEngine);
         }
 
         private void HandleCollisions() {
@@ -63,22 +67,27 @@ namespace SnakeMovement
                 snake.AddTail();
                 grid.Clear(snake.X, snake.Y);
                 grid.AddRandomPowerUp(snake.GetPositions());
+                score.Increase();
             }
 
             if (collision == CollisionType.Fatal)
                 gameState = 0;
         }
 
-        private void HandleInput(Snake s, Input input)
+        private void HandleInput()
         {
+            Input input = GetInput();
+            
+            if (input == Input.Exit)
+                gameState = 0;
             if (input == Input.Right)
-                s.ChangeDirection(1, 0);
+                snake.ChangeDirection(1, 0);
             if (input == Input.Left)
-                s.ChangeDirection(-1, 0);
+                snake.ChangeDirection(-1, 0);
             if (input == Input.Up)
-                s.ChangeDirection(0, -1);
+                snake.ChangeDirection(0, -1);
             if (input == Input.Down)
-                s.ChangeDirection(0, 1);
+                snake.ChangeDirection(0, 1);
         }
 
         private Input GetInput()

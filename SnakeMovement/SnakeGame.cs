@@ -5,12 +5,12 @@ namespace SnakeMovement
 {
     public class SnakeGame
     {
-        private Grid grid;
-        private Snake snake;
-        private CollisionManager collisionManager;
+        private readonly Grid grid;
+        private readonly Snake snake;
+        private readonly CollisionManager collisionManager;
         private int gameState = 1;
-        private InputMapper inputMapper;
-        private IRenderEngine renderEngine;
+        private readonly InputMapper inputMapper;
+        private readonly IRenderEngine renderEngine;
 
         public SnakeGame(IRenderEngine renderEngine)
         {

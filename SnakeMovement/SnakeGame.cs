@@ -38,17 +38,19 @@ namespace SnakeMovement
         }
 
         public void Run() {
-            Draw();
-
-            while (gameState == 1) {
+            Draw(); // because the way input is handled it needs to be drawn first
+            GameLoop();
+            DrawGameOver();
+        }
+		
+		private void GameLoop() {
+			while (gameState == 1) {
                 HandleInput();
                 Update();
                 HandleCollisions();
                 Draw();
             }
-
-            DrawGameOver();
-        }
+		}
 
         private void Update() {
             snake.Upate();
